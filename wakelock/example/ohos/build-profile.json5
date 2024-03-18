@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2023 Hunan OpenValley Digital Industry Development Co., Ltd.
+* Copyright (c) 2024 Hunan OpenValley Digital Industry Development Co., Ltd.
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
 * You may obtain a copy of the License at
@@ -16,19 +16,6 @@
 {
   "app": {
     "signingConfigs": [
-      {
-        "name": "default",
-        "type": "HarmonyOS",
-        "material": {
-          "certpath": "/Users/hazy/.ohos/config/default_ohos_38mMC5n-bsUoq95drjywgvb9eVjDjmk6sfIJi1RrrYk=.cer",
-          "storePassword": "0000001AF79D4C22A67BD1C14D742AA1088E81955D6457FCF0196F58D0D9C6E6B84510A21CE47F2028A3",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001ACD3E704E00225C4F3C6C3E8D66D4EC5C5CFA71905241E084E44DF32A5EB1C6DB9D3CE23CF772",
-          "profile": "/Users/hazy/.ohos/config/default_ohos_38mMC5n-bsUoq95drjywgvb9eVjDjmk6sfIJi1RrrYk=.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/hazy/.ohos/config/default_ohos_38mMC5n-bsUoq95drjywgvb9eVjDjmk6sfIJi1RrrYk=.p12"
-        }
-      }
     ],
     "products": [
       {
