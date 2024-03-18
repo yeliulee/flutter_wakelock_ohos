@@ -5,9 +5,11 @@
 /build
 /.cxx
 /.test
+*.har
+oh-package-lock.json5
+BuildProfile.ets
+src/main/resources/rawfile/flutter_assets/
+src/main/ets/plugins/GeneratedPluginRegistrant.ets
 libs/arm64-v8a/libapp.so
 libs/arm64-v8a/libflutter.so
 libs/arm64-v8a/libvmservice_snapshot.so
-src/main/resources/rawfile/flutter_assets/
-*.har
-oh-package-lock.json5
