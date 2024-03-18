@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-import { Log } from '@ohos/flutter_ohos';
+import { Log, Any } from '@ohos/flutter_ohos';
 import { IsEnabledMessage, ToggleMessage } from './Messages';
 import common from '@ohos.app.ability.common';
 import window from '@ohos.window';
@@ -50,12 +50,12 @@ export class Wakelock implements WakelockApi {
           Log.i(TAG, "setWindowKeepScreenOn success");
           this.enabled = isKeepScreenOn;
           resolve();
-        }).catch((err: ESObject) => {
+        }).catch((err: Any) => {
           this.enabled = false;
           reject(err);
           Log.e(TAG, "setWindowKeepScreenOn error: " + JSON.stringify(err));
         })
-      }).catch((err: ESObject) => {
+      }).catch((err: Any) => {
         this.enabled = false;
         reject(err);
         Log.i(TAG, "setWindowKeepScreenOn other error: " + JSON.stringify(err));

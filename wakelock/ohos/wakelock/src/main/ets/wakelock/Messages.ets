@@ -13,7 +13,7 @@
 * limitations under the License.
 */
 
-import { BasicMessageChannel, BinaryMessenger, ByteBuffer, Log, MessageCodec } from '@ohos/flutter_ohos';
+import { BasicMessageChannel, BinaryMessenger, ByteBuffer, Log, MessageCodec, Any } from '@ohos/flutter_ohos';
 import { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';
 import StandardMessageCodec from '@ohos/flutter_ohos/src/main/ets/plugin/common/StandardMessageCodec';
 import ArrayList from '@ohos.util.ArrayList';
@@ -24,13 +24,13 @@ const TAG = "wakelock.Messages";
 export class ToggleMessage {
   enable: Boolean = false;
 
-  toMap(): Map<String, ESObject> {
-    let toMapResult: Map<String, ESObject> = new Map<String, ESObject>();
+  toMap(): Map<String, Any> {
+    let toMapResult: Map<String, Any> = new Map<String, Any>();
     toMapResult.set("enable", this.enable);
     return toMapResult;
   }
 
-  static fromMap(map: Map<String, ESObject>): ToggleMessage {
+  static fromMap(map: Map<String, Any>): ToggleMessage {
     let fromMapResult = new ToggleMessage();
     let enable: Boolean = map.get("enable") ?? false;
     fromMapResult.enable = enable;
@@ -41,13 +41,13 @@ export class ToggleMessage {
 export class IsEnabledMessage {
   enabled: Boolean = false;
 
-  toMap(): Map<String, ESObject> {
-    let toMapResult: Map<String, ESObject> = new Map<String, ESObject>();
+  toMap(): Map<String, Any> {
+    let toMapResult: Map<String, Any> = new Map<String, Any>();
     toMapResult.set("enabled", this.enabled);
     return toMapResult;
   }
 
-  static fromMap(map: Map<String, ESObject>): IsEnabledMessage {
+  static fromMap(map: Map<String, Any>): IsEnabledMessage {
     let fromMapResult = new IsEnabledMessage();
     let enabled: Boolean = map.get("enabled") ?? false;
     fromMapResult.enabled = enabled;
@@ -62,21 +62,21 @@ class WakelockApiCodec extends StandardMessageCodec {
     super();
   }
 
-  readValueOfType(type: number, buffer: ByteBuffer): ESObject {
+  readValueOfType(type: number, buffer: ByteBuffer): Any {
     // Log.i(TAG, "readValueOfType type=" + type + ", buffer=" + buffer);
     switch (type) {
       case 128:
-        return IsEnabledMessage.fromMap(this.readValue(buffer) as Map<String, ESObject>);
+        return IsEnabledMessage.fromMap(this.readValue(buffer) as Map<String, Any>);
 
       case 129:
-        return ToggleMessage.fromMap(this.readValue(buffer) as Map<String, ESObject>);
+        return ToggleMessage.fromMap(this.readValue(buffer) as Map<String, Any>);
 
       default:
         return super.readValueOfType(type, buffer);
     }
   }
 
-  writeValue(stream: ByteBuffer, value: ESObject): ESObject {
+  writeValue(stream: ByteBuffer, value: Any): Any {
     if (value instanceof IsEnabledMessage) {
       stream.writeUint8(128);
       this.writeValue(stream, value.toMap());
@@ -90,21 +90,21 @@ class WakelockApiCodec extends StandardMessageCodec {
 }
 
 export class Messages {
-  static getCodec(): MessageCodec<ESObject> {
+  static getCodec(): MessageCodec<Any> {
     return WakelockApiCodec.INSTANCE;
   }
 
   static setup(binaryMessenger: BinaryMessenger, api: WakelockApi): void {
     {
-      const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      const channel: BasicMessageChannel<Any> = new BasicMessageChannel<Any>(
         binaryMessenger, "dev.flutter.pigeon.WakelockApi.toggle", Messages.getCodec());
       if (api != null) {
         channel.setMessageHandler({
-          onMessage(message: ESObject, reply: Reply<ESObject>): void {
+          onMessage(message: Any, reply: Reply<Any>): void {
             // Log.d(TAG, 'onMessage reply:' + reply)
-            let wrapped: Map<String, ESObject> = new Map<String, ESObject>();
+            let wrapped: Map<String, Any> = new Map<String, Any>();
             try {
-              let args: ArrayList<ESObject> = message as ArrayList<ESObject>;
+              let args: ArrayList<Any> = message as ArrayList<Any>;
               let msgArg: ToggleMessage = args[0] as ToggleMessage;
 
               Log.i(TAG, "received msgArg=" + JSON.stringify(msgArg));
@@ -115,7 +115,7 @@ export class Messages {
                 Log.i(TAG, "toggle success");
                 wrapped.set("result", null);
                 reply.reply(wrapped);
-              }).catch((err: ESObject) => {
+              }).catch((err: Any) => {
                 Log.i(TAG, "toggle failed: " + JSON.stringify(err));
                 wrapped.set("error", Messages.wrapError(err));
                 reply.reply(wrapped);
@@ -132,13 +132,13 @@ export class Messages {
       }
     }
     {
-      const channel: BasicMessageChannel<ESObject> = new BasicMessageChannel<ESObject>(
+      const channel: BasicMessageChannel<Any> = new BasicMessageChannel<Any>(
         binaryMessenger, "dev.flutter.pigeon.WakelockApi.isEnabled", Messages.getCodec());
       if (api != null) {
         channel.setMessageHandler({
-          onMessage(message: ESObject, reply: Reply<ESObject>): void {
+          onMessage(message: Any, reply: Reply<Any>): void {
             // Log.d(TAG, 'onMessage reply:' + reply)
-            let wrapped: Map<String, ESObject> = new Map<String, ESObject>();
+            let wrapped: Map<String, Any> = new Map<String, Any>();
             try {
               let output: IsEnabledMessage = api.isEnabled();
               wrapped.set("result", output);
@@ -154,8 +154,8 @@ export class Messages {
     }
   }
 
-  static wrapError(error: Error): Map<String, ESObject> {
-    let errorMap: Map<String, ESObject> = new Map();
+  static wrapError(error: Error): Map<String, Any> {
+    let errorMap: Map<String, Any> = new Map();
     errorMap.set("message", error.message);
     errorMap.set("code", error.name);
     errorMap.set("details", null);
