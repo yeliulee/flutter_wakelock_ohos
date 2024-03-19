@@ -104,6 +104,7 @@
             <filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies">
             </filefilter>
             <filefilter name="licenseFileNamePolicyFilter" desc="Filters for LICENSE file policies">
+                <filteritem type="filepath" name="*/ohos/hvigor/hvigor-wrapper.js" desc="hvigorw编译程序，不影响兼容性"/>
             </filefilter>
             <filefilter name="readmeFileNamePolicyFilter" desc="Filters for README file policies">
             </filefilter>
@@ -111,6 +112,7 @@
             </filefilter>
             <filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies">
             	<filteritem type="filename" name="*.iml|*.json|*.txt" desc="desc files"/>
+                <filteritem type="filepath" name="*/ohos/dta/icudtl.dat" desc="ohos字体库文件，不影响兼容性"/>
             </filefilter>
         </filefilterlist>
     </oatconfig>
