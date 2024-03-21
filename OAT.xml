@@ -89,6 +89,7 @@
                 <filteritem type="filename" name="*.png|*.ico|*.jpg|*.webp|*.ttf|*.enc|*.mp3" desc="app resource files"/>
                 <filteritem type="filename" name="*.so|*.har" desc="engine二进制文件,不影响兼容性"/>
                 <filteritem type="filename" name="*.tgz" desc="hvigor本地插件,不影响兼容性"/>
+                <filteritem type="filename" name="*.dat" desc="字体文件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/har/" desc="hvigor本地插件,不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/entry/src/main/resources/rawfile/flutter_assets/" desc="资源文件，不影响兼容性"/>
                 <filteritem type="filepath" name="*/ohos/dta/icudtl.dat" desc="ohos字体库文件，不影响兼容性"/>
