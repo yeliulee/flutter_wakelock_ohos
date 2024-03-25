@@ -35,6 +35,9 @@ flutter:
         pluginClass: WakelockPlugin
       ios:
         pluginClass: WakelockPlugin
+      ohos:
+        package: createivemaybeno.wakelock
+        pluginClass: WakelockPlugin
       macos:
         default_package: wakelock_macos
       windows:
